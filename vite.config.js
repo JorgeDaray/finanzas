@@ -12,7 +12,7 @@ export default defineConfig({
         }),
     ],
     build: {
-        outDir: 'public/build', // Asegúrate de que esta línea esté configurada
+        outDir: 'public/build',
     },
 });
 

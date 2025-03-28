@@ -24,7 +24,7 @@ class CreateTransaccionesTable extends Migration
             $table->timestamps();
 
             // Claves foráneas
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
         });
     }

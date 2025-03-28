@@ -25,7 +25,7 @@ class Transaccion extends Model
     // Relación con el Usuario
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'usuario_id'); // Transacción pertenece a un Usuario
+        return $this->belongsTo(User::class, 'usuario_id'); // Transacción pertenece a un Usuario
     }
 
     // Relación con la Categoría

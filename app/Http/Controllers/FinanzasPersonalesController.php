@@ -85,7 +85,7 @@ class FinanzasPersonalesController extends Controller
 
         // Obtener las categorías y los usuarios
         $categorias = Categoria::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
 
         // Retornar a la vista con los datos para editar
         return view('transacciones.edit', compact('transaccion', 'categorias', 'usuarios'));
