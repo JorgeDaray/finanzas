@@ -34,13 +34,19 @@
                     <td>${{ number_format($transaccion->monto, 2) }}</td>
                     <td>{{ $transaccion->descripcion }}</td>
                     <td>
-                        <a href="{{ route('transacciones.show', $transaccion->id) }}" class="btn btn-info btn-sm">Ver</a>
-                        <a href="{{ route('transacciones.edit', $transaccion->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('transacciones.destroy', $transaccion->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta transacción?')">Eliminar</button>
-                        </form>
+                        @if($transaccion->trashed())
+                            <!-- Mostrar mensaje si la transacción ha sido eliminada -->
+                            <p class="text-danger"><strong>Esta transacción ha sido eliminada.</strong></p>
+                        @else
+                            <!-- Mostrar los botones si la transacción no ha sido eliminada -->
+                            <a href="{{ route('transacciones.show', $transaccion->id) }}" class="btn btn-info btn-sm">Ver</a>
+                            <a href="{{ route('transacciones.edit', $transaccion->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ route('transacciones.destroy', $transaccion->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta transacción?')">Eliminar</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

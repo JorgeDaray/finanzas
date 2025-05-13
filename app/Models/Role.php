@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Transaccion;
 
-class Cuenta extends Model
+class Role extends Model
 {
     use HasFactory;
 
-    // Relación con el usuario
-    public function usuario()
+    // Relación muchos a muchos con usuarios
+    public function users()
     {
-        return $this->belongsTo(Usuario::class, 'usuario_id');
+        return $this->belongsToMany(User::class);
     }
 }
+
 

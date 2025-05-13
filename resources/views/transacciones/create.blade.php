@@ -4,7 +4,7 @@
 <div class="container">
     <h1>Agregar Nueva Transacción</h1>
 
-    <form action="{{ route('transacciones.store') }}" method="POST">
+    <form action="{{ route('transacciones.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="usuario_id">Usuario</label>
@@ -47,6 +47,12 @@
         <div class="form-group">
             <label for="fecha">Fecha</label>
             <input type="date" name="fecha" id="fecha" class="form-control" required>
+        </div>
+
+        <!-- Campo de carga de archivos -->
+        <div class="form-group">
+            <label for="files">Archivos (opcional)</label>
+            <input type="file" name="files[]" id="files" class="form-control" multiple>
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Guardar Transacción</button>

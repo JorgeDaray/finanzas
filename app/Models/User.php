@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;  // Cambié esto
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Transaccion;
 
-class User extends Authenticatable // Cambié esto para extender de Authenticatable
+class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -15,7 +17,7 @@ class User extends Authenticatable // Cambié esto para extender de Authenticata
     // Definir que la columna 'correo' es el campo del correo
     public function getEmailAttribute()
     {
-        return $this->attributes['email'];  // Asegúrate de que en tu base de datos sea 'correo'
+        return $this->attributes['email'];
     }
 
     // Relación con las transacciones
@@ -35,5 +37,14 @@ class User extends Authenticatable // Cambié esto para extender de Authenticata
     {
         $this->attributes['password'] = bcrypt($value);  // Esto se asegura de que la contraseña esté cifrada
     }
+
+    // app/Models/User.php
+    // Relación muchos a muchos con roles
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
 }
+
 

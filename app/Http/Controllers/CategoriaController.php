@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Models\Role;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TransaccionNotificacion;
+use App\Models\User;
+use App\Models\Transaccion;
+
+
 
 class CategoriaController extends Controller
 {
@@ -21,21 +28,22 @@ class CategoriaController extends Controller
     }
 
     // Guardar una nueva categoría
-    public function store(Request $request)
+        public function store(Request $request)
     {
         // Validación de la categoría
-        $request->validate([
-            'nombre' => 'required|string|max:255',
+        $validatedData = $request->validate([
+            'nombre' => 'required|string|max:255', // El nombre es obligatorio, debe ser una cadena y no superar los 255 caracteres
         ]);
 
         // Crear y guardar la nueva categoría
         Categoria::create([
-            'nombre' => $request->nombre,
+            'nombre' => $validatedData['nombre'],
         ]);
 
         // Redirigir a la vista de categorías
         return redirect()->route('categorias.index');
     }
+
 
     // Mostrar los detalles de una categoría (si es necesario)
     public function show(Categoria $categoria)
@@ -52,14 +60,17 @@ class CategoriaController extends Controller
     // Actualizar una categoría (si es necesario)
     public function update(Request $request, Categoria $categoria)
     {
-        $request->validate([
-            'nombre' => 'required|string|max:255',
+        // Validación de la categoría
+        $validatedData = $request->validate([
+            'nombre' => 'required|string|max:255', // El nombre es obligatorio, debe ser una cadena y no superar los 255 caracteres
         ]);
 
+        // Actualizar la categoría
         $categoria->update([
-            'nombre' => $request->nombre,
+            'nombre' => $validatedData['nombre'],
         ]);
 
+        // Redirigir a la vista de categorías
         return redirect()->route('categorias.index');
     }
 

@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Transaccion;
 
 class Transaccion extends Model
 {
-    use HasFactory;
+
+    use HasFactory, SoftDeletes;  // Aquí se aplica el trait SoftDeletes
 
     // Especifica la tabla que se utilizará en este modelo (si el nombre de la tabla no sigue la convención de pluralización)
     protected $table = 'transacciones'; 
